@@ -7,7 +7,7 @@ function getOrCreateDeviceID() {
     let deviceId = localStorage.getItem('arta_fortuna_device_id');
     if (!deviceId) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        deviceId = 'AF-NRDGBYQV';
+        deviceId = 'AF-';
         for (let i = 0; i < 8; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
         localStorage.setItem('arta_fortuna_device_id', deviceId);
     }
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(displayEl) displayEl.innerText = currentDeviceID;
 });
 
-if (AUTHORIZED_DEVICE_ID !== 'AF-NRDGBYQV' && currentDeviceID !== AUTHORIZED_DEVICE_ID) {
+if (AUTHORIZED_DEVICE_ID !== 'KUNCI-SEMENTARA' && currentDeviceID !== AUTHORIZED_DEVICE_ID) {
     document.documentElement.innerHTML = `
         <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#1a1a2e; color:#f3f4f6; font-family:'Quicksand', sans-serif; text-align:center; padding:20px;">
             <div style="background:#273340; padding:40px 30px; border-radius:24px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #ff7675;">
