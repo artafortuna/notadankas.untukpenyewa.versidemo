@@ -7,7 +7,7 @@ function getOrCreateDeviceID() {
     let deviceId = localStorage.getItem('arta_fortuna_device_id');
     if (!deviceId) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        deviceId = 'AF-';
+        deviceId = 'AF-NRDGBYQV';
         for (let i = 0; i < 8; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
         localStorage.setItem('arta_fortuna_device_id', deviceId);
     }
