@@ -1,42 +1,46 @@
 // ==============================================================
-// 0. FITUR DEVICE LOCK & MACHINE BINDING
+// 0. FITUR DEVICE LOCK & MACHINE BINDING - VERSI FIX
 // ==============================================================
-const AUTHORIZED_DEVICE_ID = 'AF-T1SH2K4U'; 
+const AUTHORIZED_DEVICE_ID = 'AF-T1SH2K4U'; // ID punya Toko Sapi Makmur
+const STORAGE_KEY = 'arta_fortuna_device_id';
 
-function getOrCreateDeviceID() {
-    let deviceId = localStorage.getItem('arta_fortuna_device_id');
-    if (!deviceId) {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        deviceId = 'AF-';
-        for (let i = 0; i < 8; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
-        localStorage.setItem('arta_fortuna_device_id', deviceId);
+function checkLicense() {
+    let savedID = localStorage.getItem(STORAGE_KEY);
+
+    // 1. BUKA PERTAMA KALI: Langsung kunci HP ini selamanya
+    if (!savedID) { 
+        localStorage.setItem(STORAGE_KEY, AUTHORIZED_DEVICE_ID);
+        return true; 
     }
-    return deviceId;
-}
-
-const currentDeviceID = getOrCreateDeviceID();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const displayEl = document.getElementById('devIdDisplay');
-    if(displayEl) displayEl.innerText = currentDeviceID;
-});
-
-if (AUTHORIZED_DEVICE_ID !== 'KUNCI-SEMENTARA' && currentDeviceID !== AUTHORIZED_DEVICE_ID) {
-    document.documentElement.innerHTML = `
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#1a1a2e; color:#f3f4f6; font-family:'Quicksand', sans-serif; text-align:center; padding:20px;">
-            <div style="background:#273340; padding:40px 30px; border-radius:24px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #ff7675;">
-                <h1 style="font-size:3em; margin:0 0 15px 0;">🔒</h1>
-                <h2 style="color:#ff7675; margin-bottom:10px;">Akses Ditolak</h2>
-                <p style="font-size:1.1em; color:#9ca3af; margin-bottom:20px;">Aplikasi ini dilisensikan dan dikunci.</p>
-                <div style="background:#1f2937; padding:15px; border-radius:12px; border: 1px dashed #4b5563;">
-                    <span style="display:block; font-size:0.9em; color:#9ca3af; margin-bottom:5px;">Device ID Anda:</span>
-                    <strong style="font-size:1.3em; letter-spacing: 2px;">${currentDeviceID}</strong>
+    
+    // 2. CEK HP LAIN: Kalau beda ID, langsung matiin
+    if (savedID !== AUTHORIZED_DEVICE_ID) {
+        document.documentElement.innerHTML = `
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#1a1a2e; color:#f3f4f6; font-family:'Quicksand', sans-serif; text-align:center; padding:20px;">
+                <div style="background:#273340; padding:40px 30px; border-radius:24px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #ff7675;">
+                    <h1 style="font-size:3em; margin:0 0 15px 0;">🔒</h1>
+                    <h2 style="color:#ff7675; margin-bottom:10px;">Akses Ditolak</h2>
+                    <p style="font-size:1.1em; color:#9ca3af; margin-bottom:20px;">Aplikasi ini dilisensikan untuk: <b>Toko Sapi Makmur</b></p>
+                    <div style="background:#1f2937; padding:15px; border-radius:12px; border: 1px dashed #4b5563;">
+                        <span style="display:block; font-size:0.9em; color:#9ca3af; margin-bottom:5px;">Device ID Anda:</span>
+                        <strong style="font-size:1.3em; letter-spacing: 2px;">${savedID}</strong>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
-    throw new Error("Device Locked.");
+        `;
+        throw new Error("Device Locked.");
+    }
+    return true;
 }
+
+// JALANKAN CEK PALING PERTAMA
+checkLicense();
+
+// Tampilkan ID di footer kalau ada
+document.addEventListener('DOMContentLoaded', () => {
+    const displayEl = document.getElementById('devIdDisplay');
+    if(displayEl) displayEl.innerText = AUTHORIZED_DEVICE_ID;
+});
 
 // ==============================================================
 // 1. SISTEM NAVIGASI (SPA)
