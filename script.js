@@ -1,7 +1,7 @@
 // ==============================================================
 // 0. FITUR DEVICE LOCK & MACHINE BINDING
 // ==============================================================
-const AUTHORIZED_DEVICE_ID = 'AF-NRDGBYQV'; 
+const AUTHORIZED_DEVICE_ID = 'KUNCI-SEMENTARA'; 
 
 function getOrCreateDeviceID() {
     let deviceId = localStorage.getItem('arta_fortuna_device_id');
