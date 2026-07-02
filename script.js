@@ -1,20 +1,20 @@
 // ==============================================================
-// 0. FITUR DEVICE LOCK & MACHINE BINDING - VERSI FIX
+// 0. FITUR DEVICE LOCK & MACHINE BINDING - VERSI FINAL
 // ==============================================================
 const AUTHORIZED_DEVICE_ID = 'AF-T1SH2K4U'; // ID punya Toko Sapi Makmur
-const STORAGE_KEY = 'arta_fortuna_device_id';
+const STORAGE_KEY = 'arta_fortuna_device_id'; 
 
 function checkLicense() {
-    let savedID = localStorage.getItem(STORAGE_KEY);
+    const savedID = localStorage.getItem(STORAGE_KEY);
 
-    // 1. BUKA PERTAMA KALI: Langsung kunci HP ini selamanya
-    if (!savedID) { 
+    if (!savedID) {
+        // 1. BUKA PERTAMA KALI: Langsung kunci HP ini pake ID resmi
         localStorage.setItem(STORAGE_KEY, AUTHORIZED_DEVICE_ID);
-        return true; 
+        return true; // Lolos
     }
-    
-    // 2. CEK HP LAIN: Kalau beda ID, langsung matiin
+
     if (savedID !== AUTHORIZED_DEVICE_ID) {
+        // 2. HP LAIN: Langsung tembak layar lock
         document.documentElement.innerHTML = `
             <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#1a1a2e; color:#f3f4f6; font-family:'Quicksand', sans-serif; text-align:center; padding:20px;">
                 <div style="background:#273340; padding:40px 30px; border-radius:24px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border-top: 5px solid #ff7675;">
@@ -30,16 +30,16 @@ function checkLicense() {
         `;
         throw new Error("Device Locked.");
     }
-    return true;
+    return true; // Lolos
 }
 
-// JALANKAN CEK PALING PERTAMA
-checkLicense();
+// WAJIB JALAN PALING PERTAMA SEBELUM KODE LAIN
+checkLicense(); 
 
-// Tampilkan ID di footer kalau ada
+// Tampilkan ID di footer
 document.addEventListener('DOMContentLoaded', () => {
     const displayEl = document.getElementById('devIdDisplay');
-    if(displayEl) displayEl.innerText = AUTHORIZED_DEVICE_ID;
+    if(displayEl) displayEl.innerText = AUTHORIZED_DEVICE_ID; // Tampilin ID resmi
 });
 
 // ==============================================================
