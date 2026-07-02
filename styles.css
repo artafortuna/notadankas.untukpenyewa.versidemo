@@ -1,0 +1,165 @@
+/* Variabel CSS untuk kemudahan ganti tema */
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    --container-bg: rgba(255, 255, 255, 0.96);
+    --text-main: #4a4a4a;
+    --text-label: #555;
+    --text-muted: #636e72;
+    --input-bg: #fafafa;
+    --input-border: #e2e8f0;
+    --card-bg: #ffffff;
+    --card-border: #f1f2f6;
+    --laba-bg: #f0fdf4;
+    --laba-border: #86efac;
+    --laba-bulanan-bg: #f0f8ff;
+    --laba-bulanan-border: #8cc4ef;
+    --highlight: #6a82fb;
+    --modal-overlay: rgba(0, 0, 0, 0.5);
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --container-bg: #1f2937;
+    --text-main: #f3f4f6;
+    --text-label: #d1d5db;
+    --text-muted: #9ca3af;
+    --input-bg: #374151;
+    --input-border: #4b5563;
+    --card-bg: #273340;
+    --card-border: #374151;
+    --laba-bg: #064e3b;
+    --laba-border: #059669;
+    --laba-bulanan-bg: #1e3a8a;
+    --laba-bulanan-border: #2563eb;
+    --highlight: #93c5fd;
+    --modal-overlay: rgba(0, 0, 0, 0.75);
+    --nav-bg: rgba(31, 41, 55, 0.9);
+}
+
+body { 
+    font-family: 'Quicksand', sans-serif; 
+    background: var(--bg-gradient);
+    padding: 20px 0; /* Padding kiri-kanan dihapus agar container bisa meregang */
+    color: var(--text-main); 
+    margin: 0;
+    min-height: 100vh;
+    padding-bottom: 125px; /* Jarak ekstra agar tidak tertutup nav & footer */
+    transition: background 0.4s ease;
+}
+
+/* LEBAR HAMPIR MEMENUHI LAYAR */
+.container { 
+    width: 95%; 
+    max-width: 700px; 
+    margin: auto; 
+    background: var(--container-bg); 
+    padding: 25px; 
+    border-radius: 24px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+    position: relative; 
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Sistem Pindah Halaman */
+.view { display: none; animation: fadeIn 0.4s ease; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.btn-tema {
+    position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5em; cursor: pointer; padding: 5px; border-radius: 50%; width: auto; z-index: 10;
+}
+
+h2 { text-align: center; margin-top: 5px; color: var(--highlight); font-weight: 700; font-size: 1.6em; margin-bottom: 15px; }
+
+/* Input POS */
+.pengaturan-toko { background: var(--card-bg); padding: 15px; border-radius: 16px; border: 2px dashed #a29bfe; margin-bottom: 25px; }
+.input-toko, .input-jadwal { text-align: center; border: none; background: transparent; width: 100%; font-family: 'Quicksand', sans-serif; }
+.input-toko { font-size: 1.2em; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+.input-jadwal { font-size: 0.85em; color: var(--text-muted); }
+.input-toko:focus, .input-jadwal:focus { outline: none; border-bottom: 1px solid var(--highlight); }
+
+label { font-weight: 600; display: block; margin-top: 15px; font-size: 0.95em; color: var(--text-label); }
+input, select { width: 100%; padding: 14px; margin-top: 8px; box-sizing: border-box; border: 2px solid var(--input-border); border-radius: 12px; font-size: 1em; font-family: 'Quicksand', sans-serif; background-color: var(--input-bg); color: var(--text-main); transition: all 0.3s ease; }
+input:focus, select:focus { border-color: #fc99b9; outline: none; }
+
+button { width: 100%; padding: 14px; border: none; border-radius: 14px; font-weight: 700; font-size: 1.05em; cursor: pointer; font-family: 'Quicksand', sans-serif; transition: transform 0.1s ease; }
+button:active { transform: scale(0.97); }
+.btn-utama { background: linear-gradient(135deg, #fc99b9 0%, #ffb199 100%); color: white; margin-top: 25px; box-shadow: 0 4px 15px rgba(252, 153, 185, 0.4); }
+.btn-edit-mode { background: linear-gradient(135deg, #ffeaa7 0%, #ffb142 100%) !important; color: #2d3436 !important; }
+.btn-batal { background: #dfe6e9; color: #636e72; margin-top: 8px; display: none; }
+.btn-wa { background: #4ae38c; color: white; margin-top: 10px; padding: 10px; font-size: 0.85em;}
+.btn-edit-kartu { background: #74b9ff; color: white; margin-top: 10px; padding: 10px; font-size: 0.85em;}
+.btn-hapus { background: #ff7675; color: white; margin-top: 10px; padding: 10px; font-size: 0.85em;}
+
+.rekap-container { display: flex; gap: 12px; margin-top: 30px; }
+.laba-box { flex: 1; padding: 15px 8px; background: var(--laba-bg); border-radius: 16px; text-align: center; border: 2px dashed var(--laba-border); }
+.laba-box.bulanan { background: var(--laba-bulanan-bg); border-color: var(--laba-bulanan-border); }
+.laba-box span:first-child { font-weight: 600; color: var(--text-label); font-size: 0.85em; display: block;}
+.angka-laba { font-size: 1.25em; font-weight: 700; display: block; margin-top: 5px;}
+.text-hijau { color: #10b981; }
+.text-biru { color: #3b82f6; }
+
+.select-bulan-rekap { border: none; background: transparent; font-weight: 700; font-family: 'Quicksand', sans-serif; color: var(--highlight); font-size: 0.9em; padding: 2px; margin-top: 2px; cursor: pointer; width: auto; text-align-last: center; }
+.input-cari { background-color: var(--input-bg); border: 2px solid #a29bfe; margin-bottom: 10px; padding: 10px 15px; border-radius: 20px; }
+
+.kartu-riwayat { background: var(--card-bg); padding: 18px; margin-top: 15px; border-radius: 16px; border: 1px solid var(--card-border); border-left: 6px solid #a29bfe; }
+.kartu-riwayat strong { font-size: 1.15em; color: var(--text-main); display: block;}
+.waktu-teks { font-size: 0.8em; color: var(--text-muted); margin-bottom: 8px; display: block; }
+.info-teks { font-size: 0.9em; color: var(--text-muted); margin-top: 4px; display: block; }
+.untung-teks { color: #00b894; font-weight: 700; display: block; margin-top: 8px; font-size: 1.05em;}
+.grup-tombol { display: flex; gap: 6px; margin-top: 10px;}
+hr { border: 0; border-top: 2px dashed var(--input-border); margin: 35px 0; }
+
+/* TABEL PEMBUKUAN */
+.table-responsive { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--input-border); }
+.ledger-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-bg); font-size: 0.9em; }
+.ledger-table th { background: var(--input-bg); padding: 12px; font-weight: 700; color: var(--text-main); border-bottom: 2px solid var(--input-border); }
+.ledger-table td { padding: 12px; border-bottom: 1px solid var(--input-border); color: var(--text-main); }
+.cell-debit { color: #10b981; font-weight: 700; }
+.cell-kredit { color: #ff7675; font-weight: 700; }
+.clickable-cell { cursor: pointer; background-color: rgba(255, 118, 117, 0.1); border-radius: 6px; transition: background 0.3s; text-align: center; }
+.clickable-cell:hover { background-color: rgba(255, 118, 117, 0.2); }
+.keterangan-tgl { font-size: 0.8em; color: var(--text-muted); display: block; margin-bottom: 3px;}
+
+/* NAVIGASI & FOOTER MELAYANG */
+.bottom-nav {
+    position: fixed; bottom: 38px; left: 0; width: 100%; height: 65px; background: var(--nav-bg);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); cursor: pointer; width: 50%; transition: all 0.3s; }
+.nav-item svg { width: 22px; height: 22px; margin-bottom: 4px; transition: transform 0.3s; }
+.nav-item span { font-size: 12px; font-weight: 700; }
+.nav-item.active { color: var(--highlight); }
+.nav-item.active svg { transform: translateY(-3px); }
+
+.floating-copyright {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 38px; background: var(--input-bg); 
+    text-align: center; font-size: 0.75em; color: var(--text-muted); display: flex; flex-direction: column; justify-content: center; z-index: 1005; border-top: 1px solid var(--input-border); padding: 0; margin: 0; font-weight: 600;
+}
+
+/* MODAL / POPUP */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-overlay); display: none; justify-content: center; align-items: center; z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
+.modal-overlay.show { display: flex; opacity: 1; }
+.modal-box { background: var(--container-bg); padding: 25px; border-radius: 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: scale(0.8); transition: transform 0.3s ease; }
+.modal-overlay.show .modal-box { transform: scale(1); }
+.modal-box p { font-size: 1.05em; font-weight: 600; color: var(--text-main); margin-bottom: 20px;}
+.modal-actions { display: flex; gap: 10px; }
+.modal-actions button { margin-top: 0; flex: 1; }
+.btn-modal-ok { background: var(--highlight); color: white; }
+.btn-modal-batal { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--input-border); }
+datalist { color: #000; }
+
+/* EFEK KLIK/SENTUH KHUSUS DEBIT (HIJAU) */
+.clickable-debit { 
+    cursor: pointer; 
+    background-color: rgba(16, 185, 129, 0.1); 
+    border-radius: 6px; 
+    transition: background 0.3s; 
+    text-align: center; 
+}
+.clickable-debit:hover { 
+    background-color: rgba(16, 185, 129, 0.2); 
+}
