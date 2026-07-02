@@ -1,9 +1,3 @@
-// Tampilkan ID di footer
-document.addEventListener('DOMContentLoaded', () => {
-    const displayEl = document.getElementById('devIdDisplay');
-    if(displayEl) displayEl.innerText = AUTHORIZED_DEVICE_ID; // Tampilin ID resmi
-});
-
 // ==============================================================
 // 1. SISTEM NAVIGASI (SPA)
 // ==============================================================
