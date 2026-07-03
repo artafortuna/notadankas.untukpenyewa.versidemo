@@ -1,7 +1,7 @@
 // ==============================================================
 // 0. DEVICE LOCK (PERBAIKAN LOGIKA)
 // ==============================================================
-const AUTHORIZED_DEVICE_ID = 'AF-JPF4N6V1';
+const AUTHORIZED_DEVICE_ID = '';
 
 function getOrCreateDeviceID() {
     let id = localStorage.getItem('arta_fortuna_device_id');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('jadwalToko').value = localStorage.getItem('jadwalTokoPenyewa') || '';
 });
 
-if (AUTHORIZED_DEVICE_ID !== 'KUNCI-SEMENTARA' && currentDeviceID !== AUTHORIZED_DEVICE_ID) {
+if (AUTHORIZED_DEVICE_ID !== '' && currentDeviceID !== AUTHORIZED_DEVICE_ID) {
     document.documentElement.innerHTML = `
         <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:#1a1a2e;color:white;font-family:sans-serif;text-align:center;padding:20px;">
             <div style="background:#273340;padding:40px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.5);border-top:5px solid #ff7675;">
