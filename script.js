@@ -1,7 +1,7 @@
 // ==============================================================
 // 0. DEVICE LOCK (PERBAIKAN LOGIKA)
 // ==============================================================
-const AUTHORIZED_DEVICE_ID = 'j';
+const AUTHORIZED_DEVICE_ID = 'AF-FGNFWD78';
 
 function getOrCreateDeviceID() {
     let id = localStorage.getItem('arta_fortuna_device_id');
