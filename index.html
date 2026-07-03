@@ -10,155 +10,99 @@
 <body>
 
     <main id="app-container" class="container">
-        <button id="btnTema" class="btn-tema" onclick="toggleTema()">🌙</button>
 
         <section id="view-kasir" class="view active">
-            <h2>✨ Buku Kas Mini ✨</h2>
-            
+            <div class="header-row">
+                <h2>✨ Buku Kas Mini ✨</h2>
+                <button id="btnTema" class="btn-tema" onclick="toggleTema()">🌙</button>
+            </div>
             <div class="pengaturan-toko">
                 <input type="text" id="namaToko" class="input-toko" placeholder="🏪 Tulis Nama Toko Di Sini" onkeyup="simpanPengaturan()">
-                <input type="text" id="jadwalToko" class="input-jadwal" placeholder="📅 Cth: Senin - Sabtu (07.00 - 22.00 WIB)" onkeyup="simpanPengaturan()">
+                <input type="text" id="jadwalToko" class="input-jadwal" placeholder="📅 0812 | afortuna.id" onkeyup="simpanPengaturan()">
             </div>
 
             <label>👤 Nama Pembeli</label>
             <input type="text" id="nama" placeholder="Contoh: Kak Dika">
-
             <label>📦 Produk Terjual</label>
-            <input type="text" id="produk" placeholder="Contoh: Premium Netflix 1 Bln">
-
+            <input type="text" id="produk" placeholder="Contoh: Pulsa Indosat 10k">
             <label>💳 Metode Pembayaran</label>
             <input type="text" id="metodeBayar" list="opsiBayar" placeholder="Contoh: BCA, DANA, QRIS">
             <datalist id="opsiBayar">
-                <option value="QRIS"></option>
-                <option value="DANA"></option>
-                <option value="BCA"></option>
-                <option value="OVO"></option>
-                <option value="GOPAY"></option>
-                <option value="LinkAja"></option>
-                <option value="Bank Mandiri"></option>
-                <option value="Tunai / Cash"></option>
+                <option value="QRIS"><option value="DANA"><option value="BCA"><option value="Tunai / Cash">
             </datalist>
 
-            <label>💸 Uang Diterima (Harga Jual = Masuk Debit)</label>
-            <input type="number" id="jual" placeholder="Contoh: 35000">
-
-            <label>💎 Harga Modal (Dari Supplier)</label>
-            <input type="number" id="modal" placeholder="Contoh: 30000">
+            <label>💸 Uang Diterima (Harga Jual)</label>
+            <input type="number" id="jual" placeholder="Contoh: 12000">
+            <label>💎 Harga Modal (Saldo Terpotong)</label>
+            <input type="number" id="modal" placeholder="Contoh: 10500">
 
             <button id="btnSimpan" class="btn-utama" onclick="simpanData()">Simpan & Buat Nota WA 🚀</button>
             <button id="btnBatal" class="btn-batal" onclick="batalkanEdit()">Batal Edit ❌</button>
 
             <div class="rekap-container">
-                <div class="laba-box">
-                    <span>🎯 Laba Hari Ini</span>
-                    <span class="angka-laba text-hijau" id="labaHariIni">Rp 0</span>
-                </div>
+                <div class="laba-box"><span>🎯 Laba Hari Ini</span><span class="angka-laba text-hijau" id="labaHariIni">Rp 0</span></div>
                 <div class="laba-box bulanan">
                     <span>🏆 Laba Bulan:</span>
                     <select id="pilihBulan" class="select-bulan-rekap" onchange="tampilkanTabel()"></select>
                     <span class="angka-laba text-biru" id="labaBulanIni">Rp 0</span>
                 </div>
             </div>
-
             <hr>
-
-            <h3 style="text-align: center; color: var(--highlight); margin-bottom: 10px;">Riwayat Penjualan 📜</h3>
-            <input type="text" id="cariPelanggan" class="input-cari" placeholder="🔍 Cari nama pembeli di sini..." onkeyup="tampilkanTabel()">
+            <input type="text" id="cariPelanggan" class="input-cari" placeholder="🔍 Cari nama pembeli..." onkeyup="tampilkanTabel()">
             <div id="daftarTransaksi"></div>
         </section>
 
         <section id="view-pembukuan" class="view">
             <h2>📘 Pembukuan Kas</h2>
-            <p style="text-align:center; color:var(--text-muted); font-size: 0.9em; margin-bottom: 20px;">
-                💡 <i>Sentuh/Klik pada kolom <b>Kredit</b> untuk menambah atau mengedit pengeluaran.</i>
-            </p>
-
             <div class="rekap-container" style="margin-top:0; margin-bottom: 20px;">
-                <div class="laba-box" style="background:var(--laba-bulanan-bg); border-color:var(--laba-bulanan-border);">
-                    <span style="font-size:0.75em;">💳 Kas (Tunai/Rek)</span>
-                    <span class="angka-laba text-biru" id="totalSaldoKas">Rp 0</span>
-                </div>
-                <div class="laba-box" style="background:var(--laba-bg); border-color:var(--laba-border);">
-                    <span style="font-size:0.75em;">📱 Deposit (Supplier)</span>
-                    <span class="angka-laba text-hijau" id="totalSaldoDeposit">Rp 0</span>
-                </div>
-            </div>
-
+    <div class="laba-box" style="background:var(--laba-bulanan-bg); border-color:var(--laba-bulanan-border);">
+        <span style="font-size:0.75em;">📈 Omzet Kotor</span>
+        <span class="angka-laba text-biru" id="totalOmzetKotor">Rp 0</span>
+    </div>
+    <div class="laba-box" style="background:var(--laba-bulanan-bg); border-color:var(--laba-bulanan-border);">
+        <span style="font-size:0.75em;">💳 Kas Riil (Di Tangan)</span>
+        <span class="angka-laba text-biru" id="totalSaldoKas">Rp 0</span>
+    </div>
+    <div class="laba-box" style="background:var(--laba-bg); border-color:var(--laba-border);">
+        <span style="font-size:0.75em;">📱 Sisa Deposit (Supplier)</span>
+        <span class="angka-laba text-hijau" id="totalSaldoDeposit">Rp 0</span>
+    </div>
+</div>
             <div class="table-responsive">
                 <table class="ledger-table">
-                    <thead>
-                        <tr>
-                            <th>Keterangan</th>
-                            <th>Debit (Masuk)</th>
-                            <th>Kredit (Keluar)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ledgerBody">
-                        </tbody>
+                    <thead><tr><th>Keterangan</th><th>Debit (Masuk)</th><th>Kredit (Keluar)</th></tr></thead>
+                    <tbody id="ledgerBody"></tbody>
                 </table>
             </div>
         </section>
-
     </main>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('view-kasir', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V2H4z"/><path d="M16 14h-8"/><path d="M16 10h-8"/><path d="M10 6h-2"/></svg>
-            <span>POS Kasir</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('view-pembukuan', this); loadPembukuan();">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-            <span>Pembukuan</span>
-        </div>
+        <div class="nav-item active" onclick="switchTab('view-kasir', this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V2H4z"/></svg><span>Kasir</span></div>
+        <div class="nav-item" onclick="switchTab('view-pembukuan', this); loadPembukuan();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span>Buku</span></div>
     </nav>
 
     <footer class="floating-copyright">
-        <span style="font-size: 0.9em; display:block;">Licensed to: Toko Arta Fortuna | Device ID : <strong id="devIdDisplay"></strong></span>
-        <span>© 2026 Arta Fortuna. All Rights Reserved.</span>
+        <span>Licensed to: Arta Fortuna | Device ID: <strong id="devIdDisplay"></strong></span>
+        <span>© 2026 All Rights Reserved.</span>
     </footer>
 
-    <div id="customModal" class="modal-overlay">
-        <div class="modal-box">
-            <p id="modalTeks">Pesan muncul di sini</p>
-            <div class="modal-actions">
-                <button id="modalBtnBatal" class="btn-modal-batal">Batal</button>
-                <button id="modalBtnOK" class="btn-modal-ok">OK</button>
-            </div>
-        </div>
-    </div>
+    <div id="customModal" class="modal-overlay"><div class="modal-box"><p id="modalTeks"></p><div class="modal-actions"><button id="modalBtnBatal" class="btn-modal-batal">Batal</button><button id="modalBtnOK" class="btn-modal-ok">OK</button></div></div></div>
 
     <div id="modalInputKredit" class="modal-overlay">
         <div class="modal-box">
-            <h3 id="judulModalKredit" style="color:var(--text-main); margin-top:0;">📝 Catat Pengeluaran</h3>
-            
-            <select id="kreditJenis" style="margin-bottom: 10px; font-weight: 600;">
-                <option value="umum">🛒 Pengeluaran Toko / Beban</option>
-                <option value="deposit">🔄 Top-Up Saldo Supplier</option>
-            </select>
-            
-            <input type="text" id="kreditKet" placeholder="Keterangan (Cth: Beli Kuota)" style="margin-bottom: 10px;">
-            <input type="number" id="kreditJumlah" placeholder="Jumlah Keluar (Cth: 25000)">
-            
-            <div class="modal-actions" style="margin-top: 20px;">
-                <button class="btn-modal-batal" onclick="tutupModalKredit()">Batal</button>
-                <button id="btnHapusKredit" style="background:#ff7675; color:white; display:none;" onclick="hapusKredit()">Hapus</button>
-                <button class="btn-modal-ok" onclick="simpanKredit()">Simpan</button>
-            </div>
+            <h3>📝 Catat Pengeluaran</h3>
+            <select id="kreditJenis" style="margin-bottom:10px;"><option value="umum">🛒 Pengeluaran Toko</option><option value="deposit">🔄 Top-Up Supplier</option></select>
+            <input type="text" id="kreditKet" placeholder="Keterangan"><input type="number" id="kreditJumlah" placeholder="Jumlah">
+            <div class="modal-actions"><button class="btn-modal-batal" onclick="tutupModalKredit()">Batal</button><button id="btnHapusKredit" style="background:#ff7675;color:white;display:none" onclick="hapusKredit()">Hapus</button><button class="btn-modal-ok" onclick="simpanKredit()">Simpan</button></div>
         </div>
     </div>
 
     <div id="modalInputDebit" class="modal-overlay">
         <div class="modal-box">
-            <h3 id="judulModalDebit" style="color:var(--text-main); margin-top:0;">📝 Catat Pemasukan</h3>
-            
-            <input type="text" id="debitKet" placeholder="Keterangan (Cth: Tambahan Uang Kasir)" style="margin-bottom: 10px;">
-            <input type="number" id="debitJumlah" placeholder="Jumlah Masuk (Cth: 1500000)">
-            
-            <div class="modal-actions" style="margin-top: 20px;">
-                <button class="btn-modal-batal" onclick="tutupModalDebit()">Batal</button>
-                <button id="btnHapusDebit" style="background:#ff7675; color:white; display:none;" onclick="hapusDebit()">Hapus</button>
-                <button id="btnSimpanDebit" class="btn-modal-ok" onclick="simpanDebit()" style="background:#10b981;">Simpan</button>
-            </div>
+            <h3>📝 Catat Pemasukan</h3>
+            <input type="text" id="debitKet" placeholder="Keterangan"><input type="number" id="debitJumlah" placeholder="Jumlah">
+            <div class="modal-actions"><button class="btn-modal-batal" onclick="tutupModalDebit()">Batal</button><button id="btnHapusDebit" style="background:#ff7675;color:white;display:none" onclick="hapusDebit()">Hapus</button><button class="btn-modal-ok" onclick="simpanDebit()" style="background:#10b981;">Simpan</button></div>
         </div>
     </div>
 
